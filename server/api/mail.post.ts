@@ -1,51 +1,55 @@
 import nodemailer from 'nodemailer'
 
-export default defineEventHandler( async ( event ) => {
+export default defineEventHandler(async (event) => {
+  const form = await readMultipartFormData(event)
 
-  const data = await readBody( event )
+  if (!form) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Keine Formulardaten empfangen.'
+    })
+  }
 
-  const toEmail: string  = process.env.EMAIL_TO!
-  const username: string = process.env.EMAIL_USERNAME!
-  const password: string = process.env.EMAIL_PASSWORD!
+  const kommentar =
+    form.find(field => field.name === 'kommentar')?.data.toString() ?? ''
 
-  let sent = false
+  const attachments = form
+    .filter(field => field.filename)
+    .map(file => ({
+      filename: file.filename,
+      content: file.data,
+      contentType: file.type
+    }))
 
-  let message = ''
-
-  const transporter = nodemailer.createTransport( {
+  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: username,
-      pass: password
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD
     }
-  } )
-
-  const mailOptions = {
-    from: username,
-
-    // This is the email address of the user who submitted the form, so you can reply to them
-    replyTo: data.email,
-    to: toEmail,
-    subject: 'A new email has arrived',
-
-    html: `<p>${data.message}</p>`,
-
-    text: data.message
-  }
+  })
 
   try {
-    await transporter.sendMail( mailOptions )
-    sent = true
-    message = `Thank you for your message, ${data?.name}!`
+    await transporter.sendMail({
+      from: process.env.EMAIL_USERNAME,
+      to: process.env.EMAIL_TO,
+      subject: 'Neuer Antrag auf Fahrtkostenzuschuss',
 
-  } catch ( e ) {
-    console.log( e )
-    message = 'An error has occurred while sending the email. Please try it again.'
-    sent = false
-  }
+      text: `Ein neuer Antrag auf Fahrtkostenzuschuss wurde eingereicht. ${kommentar}`,
 
-  return {
-    sent,
-    message
+      attachments
+    })
+
+    return {
+      sent: true
+    }
+
+  } catch (error) {
+    console.error(error)
+
+    return {
+      sent: false,
+      message: 'Beim Senden der E-Mail ist ein Fehler aufgetreten.'
+    }
   }
-} )
+})
