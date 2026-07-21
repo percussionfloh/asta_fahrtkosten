@@ -1,17 +1,16 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// nuxt.config.ts
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: false },
-
-    modules: ['@nuxt/content', '@nuxt/ui', '@nuxtjs/i18n'],
-    css: ['~/assets/main.css'],
-
-    i18n: {
-        strategy: 'prefix_except_default',
-        locales: [
-            { code: 'de', language: 'de-DE', file: 'de.yaml', dir: 'ltr' },
-        ],
-        defaultLocale: 'de',
-        langDir: 'locales/',
-    },
-});
+  modules: [
+    '@nuxt/content',
+    '@nuxt/ui',
+    '@nuxtjs/i18n',
+    'nuxt-nodemailer'
+  ],
+  runtimeConfig: {
+    MAILHOST: process.env.MAILHOST,
+    MAILPORT: process.env.MAILPORT,
+    MAILUSER: process.env.MAILUSER,
+    MAILPASSWORD: process.env.MAILPASSWORD,
+    CONTACTMAIL: process.env.CONTACTMAIL
+  }
+})
