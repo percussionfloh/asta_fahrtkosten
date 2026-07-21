@@ -1,9 +1,28 @@
 <script setup>
+import { ref } from 'vue'
+
 useHead({
   title: 'Fahrtkostenzuschuss AStA HfM Freiburg',
 })
 
-const value = ref(null)
+const antrag = ref(null)
+const rechnung = ref(null)
+const bestaetigung = ref(null)
+
+const onSubmit = async (event) => {
+  event.preventDefault()
+
+  const formData = new FormData()
+
+  formData.append('antrag', antrag.value)
+  formData.append('rechnung', rechnung.value)
+  formData.append('bestaetigung', bestaetigung.value)
+
+  await $fetch('/api/mail', {
+    method: 'POST',
+    body: formData
+  })
+}
 
 </script>
 <template>
@@ -40,10 +59,13 @@ const value = ref(null)
       </div>
 
       <div class="grid justify-items-center grid-cols-4 p-4 gap-3">
-        <UFileUpload v-model="value" :dropzone="true" label="ausgefüllter Antrag" class="w-full" />
-          <UFileUpload v-model="value" :dropzone="true" label="Rechnung(en), bitte als PDF zusammengefügt" class="w-full" />
-          <UFileUpload v-model="value" :dropzone="true" label="Teilnahmebestätigung" class="w-full"/>
+        <UForm @submit="onSubmit">
+          <UFileUpload v-model="antrag" :dropzone="true" label="ausgefüllter Antrag" class="w-full" />
+          <UFileUpload v-model="rechnung" :dropzone="true" label="Rechnung(en), bitte als PDF zusammengefügt" class="w-full" />
+          <UFileUpload v-model="bestaetigung" :dropzone="true" label="Teilnahmebestätigung" class="w-full"/>
           <UTextarea :rows="9" class="w-full border-red-500" placeholder="weitere Infos für den AStA"/>
+          <UButton label="Submit" />        
+        </UForm>
       </div>
 
       <div class="p-7">
