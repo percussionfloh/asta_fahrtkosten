@@ -34,7 +34,9 @@ const submitForm = async () => {
     }
 
     formData.append('kommentar', kommentar.value)
+
     formData.append('firstName', firstName.value)
+
     formData.append('lastName', lastName.value)
 
     const data = await $fetch('/api/mail', {
@@ -81,11 +83,13 @@ const resetForm = () => {
 
     <form v-else action="/" method="post" class="mb-6" @submit.prevent="submitForm">
       <div  class="grid justify-items-center grid-cols-5 p-4 gap-3 w-full">
-        <div class="w-full">
-          <UInput v-model="firstName" class="w-full border-red-500" placeholder="Nachname, Vorname"/>
-        </div>
-        <div class="w-full">
-          <UInput v-model="lastName" class="w-full border-red-500" placeholder="Nachname, Vorname"/>
+        <div class="grid grid-rows-4">
+          <div class="w-full">
+            <UInput v-model="firstName" class="w-full border-red-500" placeholder="Vorname"/>
+          </div>
+          <div class="w-full">
+            <UInput v-model="lastName" class="w-full border-red-500" placeholder="Nachname"/>
+          </div>
         </div>
 
         <div class="w-full">
