@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 
 useHead({
   title: 'Fahrtkostenzuschuss AStA HfM Freiburg',
@@ -31,7 +30,9 @@ useHead({
       </div>
 
       <div>
-        <UButton class="bg-red-500 hover:bg-red-800" size="xl" label="Antrag herunterladen (pdf)" icon="i-lucide-download"></UButton>
+        <a href="fahrtkostenantrag.pdf" download>
+          <UButton class="bg-red-500 hover:bg-red-800" size="xl" label="Antrag herunterladen (pdf)" icon="i-lucide-download" />
+        </a>
       </div>
       <div class="p-5">
         <p>Die Bezuschussung von Fahrtkosten zu Studienzwecken aus Haushaltsmitteln des AStA der Hochschule für Musik Freiburg ist ein Angebot,
