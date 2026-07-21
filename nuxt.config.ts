@@ -6,12 +6,29 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'nuxt-nodemailer'
   ],
+
   css: ['~/assets/main.css'],
+
   runtimeConfig: {
     MAILHOST: process.env.MAILHOST,
     MAILPORT: process.env.MAILPORT,
     MAILUSER: process.env.MAILUSER,
     MAILPASSWORD: process.env.MAILPASSWORD,
     CONTACTMAIL: process.env.CONTACTMAIL
+  },
+
+  i18n: {
+    locales: [
+      {
+        code: 'de',
+        file: 'de.yaml'
+      },
+      {
+        code: 'en',
+        file: 'en.yaml'
+      }
+    ],
+    defaultLocale: 'de',
+    langDir: 'locales/'
   }
 })
