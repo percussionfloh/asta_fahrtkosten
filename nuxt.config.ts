@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'nuxt-nodemailer'
   ],
+  css: ['~/assets/main.css'],
   runtimeConfig: {
     MAILHOST: process.env.MAILHOST,
     MAILPORT: process.env.MAILPORT,
