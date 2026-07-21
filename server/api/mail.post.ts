@@ -1,61 +1,51 @@
 import nodemailer from 'nodemailer'
-import SMTPTransport from 'nodemailer/lib/smtp-transport'
 
-export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
+export default defineEventHandler( async ( event ) => {
 
-  const transporter = nodemailer.createTransport(
-    {
-      host: config.MAILHOST,
-      port: Number(config.MAILPORT),
-      secure: true,
-      auth: {
-        user: config.MAILUSER,
-        pass: config.MAILPASSWORD,
-      },
-    } as SMTPTransport.Options
-  )
+  const data = await readBody( event )
+
+  const toEmail: string  = process.env.EMAIL_TO!
+  const username: string = process.env.EMAIL_USERNAME!
+  const password: string = process.env.EMAIL_PASSWORD!
+
+  let sent = false
+
+  let message = ''
+
+  const transporter = nodemailer.createTransport( {
+    service: 'gmail',
+    auth: {
+      user: username,
+      pass: password
+    }
+  } )
+
+  const mailOptions = {
+    from: username,
+
+    // This is the email address of the user who submitted the form, so you can reply to them
+    replyTo: data.email,
+    to: toEmail,
+    subject: 'A new email has arrived',
+
+    html: `<p>${data.message}</p>`,
+
+    text: data.message
+  }
 
   try {
-    const form = await readMultipartFormData(event)
+    await transporter.sendMail( mailOptions )
+    sent = true
+    message = `Thank you for your message, ${data?.name}!`
 
-                if (!form) {
-                throw createError({
-                    statusCode: 400,
-                    statusMessage: 'Keine Dateien empfangen'
-                })
-                }
-
-                console.log(form.map(file => ({
-                name: file.name,
-                filename: file.filename,
-                type: file.type,
-                size: file.data.length
-                })))
-
-    const mail = await transporter.sendMail({
-      from: config.MAILUSER,
-      to: config.CONTACTMAIL,
-      subject: 'Fahrtkostenzuschuss Antrag',
-      text: 'Neuer Antrag eingegangen',
-
-        attachments: form?.map(file => ({
-        filename: file.filename,
-        content: file.data
-        }))
-    })
-
-    return {
-      success: true,
-      messageId: mail.messageId,
-    }
-
-  } catch (error) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: error instanceof Error
-        ? error.message
-        : String(error),
-    })
+  } catch ( e ) {
+    console.log( e )
+    message = 'An error has occurred while sending the email. Please try it again.'
+    sent = false
   }
-})
+
+  return {
+    sent,
+    message
+  }
+} )
