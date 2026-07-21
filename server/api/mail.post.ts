@@ -10,16 +10,34 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  const firstName =
+  form.find(field => field.name === 'firstName')?.data.toString().trim() ?? ''
+
+  const lastName =
+  form.find(field => field.name === 'lastName')?.data.toString().trim() ?? ''
+
   const kommentar =
     form.find(field => field.name === 'kommentar')?.data.toString() ?? ''
 
   const attachments = form
-    .filter(field => field.filename)
-    .map(file => ({
-      filename: file.filename,
+  .filter(field => field.filename)
+  .map(file => {
+    let typ = file.name
+
+    if (file.name === 'antrag') {
+      typ = 'Antrag'
+    } else if (file.name === 'rechnung') {
+      typ = 'Rechnung'
+    } else if (file.name === 'bestaetigung') {
+      typ = 'Teilnahmebestaetigung'
+    }
+
+    return {
+      filename: `${typ}_${lastName}_${firstName}.pdf`,
       content: file.data,
       contentType: file.type
-    }))
+    }
+  })
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -35,7 +53,9 @@ export default defineEventHandler(async (event) => {
       to: process.env.EMAIL_TO,
       subject: 'Neuer Antrag auf Fahrtkostenzuschuss',
 
-      text: `Ein neuer Antrag auf Fahrtkostenzuschuss wurde eingereicht. ${kommentar}`,
+      text: `Ein neuer Antrag auf Fahrtkostenzuschuss wurde eingereicht. 
+      
+      Kommentar: ${kommentar}`,
 
       attachments
     })
