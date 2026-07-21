@@ -5,25 +5,6 @@ useHead({
   title: 'Fahrtkostenzuschuss AStA HfM Freiburg',
 })
 
-const antrag = ref(null)
-const rechnung = ref(null)
-const bestaetigung = ref(null)
-
-const onSubmit = async (event) => {
-  event.preventDefault()
-
-  const formData = new FormData()
-
-  formData.append('antrag', antrag.value)
-  formData.append('rechnung', rechnung.value)
-  formData.append('bestaetigung', bestaetigung.value)
-
-  await $fetch('/api/mail', {
-    method: 'POST',
-    body: formData
-  })
-}
-
 </script>
 <template>
   <div class="flex justify-start p-4">
@@ -58,7 +39,8 @@ const onSubmit = async (event) => {
            Sollte sich herausstellen, dass dieses Angebot missbraucht wird, so kann der AStA dieses Angebot zurücknehmen.</p>
       </div>
 
-      <div class="grid justify-items-center grid-cols-4 p-4 gap-3">
+      <AppForm />
+      <!-- <div class="grid justify-items-center grid-cols-4 p-4 gap-3">
         <UForm @submit="onSubmit">
           <UFileUpload v-model="antrag" :dropzone="true" label="ausgefüllter Antrag" class="w-full" />
           <UFileUpload v-model="rechnung" :dropzone="true" label="Rechnung(en), bitte als PDF zusammengefügt" class="w-full" />
@@ -66,7 +48,7 @@ const onSubmit = async (event) => {
           <UTextarea :rows="9" class="w-full border-red-500" placeholder="weitere Infos für den AStA"/>
           <UButton label="Submit" />        
         </UForm>
-      </div>
+      </div> -->
 
       <div class="p-7">
         <h2 class="text-2xl md:text-4xl text-red-600 font-bold">Was wird bezuschusst?</h2>
