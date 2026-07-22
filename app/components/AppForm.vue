@@ -1,6 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 
+useHead({
+  script: [
+    {
+      src: 'https://challenges.cloudflare.com/turnstile/v0/api.js',
+      async: true,
+      defer: true
+    }
+  ]
+})
+
+const config = useRuntimeConfig()
+
 const antrag = ref(null)
 const rechnung = ref(null)
 const bestaetigung = ref(null)
@@ -39,6 +51,17 @@ const submitForm = async () => {
 
     formData.append('lastName', lastName.value)
 
+    const token =
+      document.querySelector('input[name="cf-turnstile-response"]')?.value || ''
+
+    if (!token) {
+      serverMessage.value = 'Bitte bestätige zuerst das CAPTCHA.'
+      isSubmitting.value = false
+      return
+    }
+
+    formData.append('turnstileToken', token)
+
     const data = await $fetch('/api/mail', {
       method: 'POST',
       body: formData
@@ -62,9 +85,15 @@ const resetForm = () => {
   rechnung.value = null
   bestaetigung.value = null
   kommentar.value = ''
+  firstName.value = ''
+  lastName.value = ''
 
   wasSent.value = false
   serverMessage.value = ''
+
+  if (window.turnstile) {
+    window.turnstile.reset()
+  }
 }
 </script>
 
@@ -102,12 +131,18 @@ const resetForm = () => {
           <UTextarea v-model="kommentar" :rows="9" class="w-full" :placeholder="$t('weitere Infos für den AStA')"/>
         </div>
 
+        <div
+          class="cf-turnstile"
+          :data-sitekey="config.public.turnstileSiteKey">
+        </div>
+
         <div class="md:col-span-5 flex md:flex-row justify-center gap-4 mt-4">
           <UButton type="reset" class="bg-gray-500 hover:bg-gray-700 active:bg-gray-500" :label="$t('Eingaben löschen')" @click="resetForm"/>
 
           <UButton type="submit" class="bg-red-500 hover:bg-red-900 active:bg-red-500" :label="$t('Absenden')"/>
         </div>
       </div>
+
 
       <div v-if="serverMessage && !wasSent" class="p-4 mb-8 text-center bg-red-900 text-red-300">
         {{ serverMessage }}
