@@ -10,6 +10,10 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  const config = useRuntimeConfig()
+
+  config.turnstileSecret
+
   const firstName =
   form.find(field => field.name === 'firstName')?.data.toString().trim() ?? ''
 
