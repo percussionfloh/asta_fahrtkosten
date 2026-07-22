@@ -7,5 +7,3 @@ The following guidelines apply when calculating the subsidy:
 (3) For journeys made in a private or borrowed car, the calculation is based on a flat rate of 30 cents per kilometre.
 
 (4) For journeys in which other students from the Freiburg University of Music were given a lift, the travel costs are divided by the total number of people in the car and calculated per person. The full subsidy for all passengers is paid to the person submitting the application.
-
-Translated with DeepL.com (free version)

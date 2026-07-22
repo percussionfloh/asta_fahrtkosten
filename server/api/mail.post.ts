@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       sent: false,
-      message: 'Beim Senden der E-Mail ist ein Fehler aufgetreten.'
+      message: 'An error occurred while sending the email.'
     }
   }
 })

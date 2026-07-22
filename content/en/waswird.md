@@ -6,5 +6,3 @@ Flights are not eligible for a subsidy. Tickets for local transport services, e.
 (3) Only travel expenses incurred by students enrolled at the Freiburg University of Music are eligible for a subsidy.
 
 (4) As the AStA has only a limited budget available for travel costs, the approval of the grant and the amount of individual grants depend on the number of applications received. There is no entitlement to a travel cost grant.
-
-Translated with DeepL.com (free version)
