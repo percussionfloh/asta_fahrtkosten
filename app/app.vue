@@ -6,12 +6,11 @@ useHead({
 
 const { locale } = useI18n()
 
-const { data } = await useAsyncData(
-  'travelGrant',
-  () => queryContent('de/travelGrant/general.md').findOne()
+const { data } = await useAsyncData(() =>
+  queryCollection('docs')
+    .path(`/${locale.value}/general`)
+    .first()
 )
-
-console.log(data.value, "hah")
 </script>
 <template>
   <div class="flex justify-start p-4">
