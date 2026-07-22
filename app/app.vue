@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import logo from '~/assets/logo.png'
+
 const { locale, locales, setLocale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const { t } = useI18n();
 
 useHead({
   title: 'Fahrtkostenzuschuss AStA HfM Freiburg',
+    link: [
+    {
+      rel: 'icon',
+      type: '../assets/logo_small_lila.png',
+      href: logo
+    }
+  ]
 })
 
 function useDoc(name: string) {
