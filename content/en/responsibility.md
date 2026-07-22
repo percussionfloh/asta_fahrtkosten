@@ -1,0 +1,2 @@
+The subsidy for travel expenses incurred for study purposes, funded from the budget of the AStA at the Freiburg University of Music, is a scheme that can only be maintained if all those involved treat it honestly and responsibly.
+Should it transpire that this scheme is being misused, the AStA may withdraw it.

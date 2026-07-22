@@ -1,0 +1,2 @@
+Die Bezuschussung von Fahrtkosten zu Studienzwecken aus Haushaltsmitteln des AStA der Hochschule für Musik Freiburg ist ein Angebot, das nur aufrechterhalten werden kann, wenn alle Beteiligten ehrlich und verantwortungsbewusst damit umgehen. 
+Sollte sich herausstellen, dass dieses Angebot missbraucht wird, so kann der AStA dieses Angebot zurücknehmen.
