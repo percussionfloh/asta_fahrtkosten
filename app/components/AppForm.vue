@@ -79,51 +79,43 @@ const resetForm = () => {
       </p>
     </div>
 
-
-
     <form v-else action="/" method="post" class="mb-6" @submit.prevent="submitForm">
-      <div  class="grid justify-items-center grid-cols-5 p-4 gap-3 w-full">
-        <div class="grid grid-rows-4">
-          <div class="w-full">
-            <UInput v-model="firstName" class="w-full border-red-500" :placeholder="$t('Vorname')"/>
-          </div>
-          <div class="w-full">
-            <UInput v-model="lastName" class="w-full border-red-500" :placeholder="$t('Nachname')"/>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3 p-4 w-full">
+        <div class="flex flex-col gap-3 w-full">
+          <UInput v-model="firstName" class="w-full" :placeholder="$t('Vorname')"/>
+          <UInput v-model="lastName" class="w-full" :placeholder="$t('Nachname')"/>
         </div>
 
         <div class="w-full">
-          <UFileUpload v-model="antrag" :dropzone="true" :label="$t('ausgefüllter Antrag')" class="w-full" />
-        </div>
-
-        <div class="w-full" >
-          <UFileUpload v-model="rechnung" :dropzone="true" :label="$t('ausgefüllte Rechnung')" class="w-full" />
+          <UFileUpload v-model="antrag" :dropzone="true" :label="$t('ausgefüllter Antrag')" class="w-full"/>
         </div>
 
         <div class="w-full">
-          <UFileUpload v-model="bestaetigung" :dropzone="true" :label="$t('Teilnahmebestätigung')" class="w-full" />
+          <UFileUpload v-model="rechnung" :dropzone="true" :label="$t('ausgefüllte Rechnung')" class="w-full"/>
         </div>
 
         <div class="w-full">
-          <UTextarea v-model="kommentar" :rows="9" class="w-full border-red-500" :placeholder="$t('weitere Infos für den AStA')"/>
+          <UFileUpload v-model="bestaetigung" :dropzone="true" :label="$t('Teilnahmebestätigung')" class="w-full"/>
         </div>
 
+        <div class="w-full">
+          <UTextarea v-model="kommentar" :rows="9" class="w-full" :placeholder="$t('weitere Infos für den AStA')"/>
+        </div>
+
+        <div class="md:col-span-5 flex md:flex-row justify-center gap-4 mt-4">
+          <UButton type="reset" class="bg-gray-500 hover:bg-gray-700 active:bg-gray-500" :label="$t('Eingaben löschen')" @click="resetForm"/>
+
+          <UButton type="submit" class="bg-red-500 hover:bg-red-900 active:bg-red-500" :label="$t('Absenden')"/>
+        </div>
       </div>
 
-      <!-- This is the place where we'll display an error message if the form was not sent successfully -->
       <div v-if="serverMessage && !wasSent" class="p-4 mb-8 text-center bg-red-900 text-red-300">
         {{ serverMessage }}
       </div>
 
-      <!-- Display a spinner and a message attempting to send the email -->
       <div v-if="isSubmitting" class="text-center mb-10">
         <Icon name="svg-spinners:3-dots-scale" size="48" />
         <p>{{ $t('Antrag wird gesendet') }}</p>
-      </div>
-    
-      <div class="flex items-center justify-between">
-        <UButton type="reset" class="bg-gray-500 hover:bg-gray-700 active:bg-gray-500" :label="$t('Eingaben löschen')" />
-        <UButton type="submit" class="bg-red-500 hover:bg-red-900 active:bg-red-500" :label="$t('Absenden')" />        
       </div>
     </form>
   </div>
