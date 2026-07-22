@@ -44,15 +44,12 @@ const { data: wie } = await useDoc('wie')
     </div>
 
   <UContainer class="justify-center">
-    <div class="justify-items-center" >
+    <div class="flex flex-col items-center gap-4 p-3">
       <div>
         <img src="/assets/picture_ice.png" alt="ICE-Zug" class="max-h-150">
       </div>
       <div class="p-10">
         <h2 class="text-2xl md:text-4xl text-red-600 font-bold">{{ $t('Antrag auf einen Fahrtkostenzuschuss') }}</h2>
-      </div>
-
-      <div class="p-5">  
         <article>
           <ContentRenderer v-if="general" :value="general" />
         </article>      
@@ -62,7 +59,7 @@ const { data: wie } = await useDoc('wie')
           <UButton class="bg-red-500 hover:bg-red-800" size="xl" :label="$t('Antrag herunterladen (pdf)')" icon="i-lucide-download" />
         </a>
       </div>
-      <div class="p-5">
+      <div class="p-10">
         <article>
           <ContentRenderer v-if="responsibility" :value="responsibility" />
         </article>  
@@ -70,10 +67,8 @@ const { data: wie } = await useDoc('wie')
 
       <AppForm />
 
-      <div class="p-7">
+      <div class="p-10">
         <h2 class="text-2xl md:text-4xl text-red-600 font-bold">{{ $t('Was wird bezuschusst?') }}</h2>
-      </div>
-      <div class="p-3">
         <article>
           <ContentRenderer v-if="waswird" :value="waswird" />
         </article>  
@@ -81,21 +76,17 @@ const { data: wie } = await useDoc('wie')
       
       <div class="p-10">
         <h2 class="text-2xl md:text-4xl text-red-600 font-bold">{{ $t('Höhe des Zuschusses') }}</h2>
-      </div>
-      <div class="p-3">
         <article>
           <ContentRenderer v-if="hohe" :value="hohe" />
         </article>
       </div>
     
-        <div class="p-10">
-          <h2 class="text-2xl md:text-4xl text-red-600 font-bold">{{ $t('Wie funktioniert die Antragsstellung?') }}</h2>
-        </div>
-        <div class="p-3">
-        <article>
-          <ContentRenderer v-if="wie" :value="wie" />
-        </article>
-        </div>
+      <div class="p-10">
+        <h2 class="text-2xl md:text-4xl text-red-600 font-bold">{{ $t('Wie funktioniert die Antragsstellung?') }}</h2>
+      <article>
+        <ContentRenderer v-if="wie" :value="wie" />
+      </article>
+      </div>
     </div>
   </UContainer>
 </template>
