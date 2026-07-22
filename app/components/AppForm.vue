@@ -85,27 +85,27 @@ const resetForm = () => {
       <div  class="grid justify-items-center grid-cols-5 p-4 gap-3 w-full">
         <div class="grid grid-rows-4">
           <div class="w-full">
-            <UInput v-model="firstName" class="w-full border-red-500" placeholder="Vorname"/>
+            <UInput v-model="firstName" class="w-full border-red-500" :placeholder="$t('Vorname')"/>
           </div>
           <div class="w-full">
-            <UInput v-model="lastName" class="w-full border-red-500" placeholder="Nachname"/>
+            <UInput v-model="lastName" class="w-full border-red-500" :placeholder="$t('Nachname')"/>
           </div>
         </div>
 
         <div class="w-full">
-          <UFileUpload v-model="antrag" :dropzone="true" label="ausgefüllter Antrag" class="w-full" />
+          <UFileUpload v-model="antrag" :dropzone="true" :label="$t('ausgefüllter Antrag')" class="w-full" />
         </div>
 
         <div class="w-full" >
-          <UFileUpload v-model="rechnung" :dropzone="true" label="ausgefüllte Rechnung" class="w-full" />
+          <UFileUpload v-model="rechnung" :dropzone="true" :label="$t('ausgefüllte Rechnung')" class="w-full" />
         </div>
 
         <div class="w-full">
-          <UFileUpload v-model="bestaetigung" :dropzone="true" label="Teilnahmebestätigung" class="w-full" />
+          <UFileUpload v-model="bestaetigung" :dropzone="true" :label="$t('Teilnahmebestätigung')" class="w-full" />
         </div>
 
         <div class="w-full">
-          <UTextarea v-model="kommentar" :rows="9" class="w-full border-red-500" placeholder="weitere Infos für den AStA"/>
+          <UTextarea v-model="kommentar" :rows="9" class="w-full border-red-500" :placeholder="$t('weitere Infos für den AStA')"/>
         </div>
 
       </div>
@@ -118,12 +118,12 @@ const resetForm = () => {
       <!-- Display a spinner and a message attempting to send the email -->
       <div v-if="isSubmitting" class="text-center mb-10">
         <Icon name="svg-spinners:3-dots-scale" size="48" />
-        <p>Sending Message...</p>
+        <p>{{ $t('Antrag wird gesendet') }}</p>
       </div>
     
       <div class="flex items-center justify-between">
-        <UButton type="reset" class="bg-gray-500 hover:bg-gray-700 active:bg-gray-500" label="Eingaben löschen"/>
-        <UButton type="submit" class="bg-red-500 hover:bg-red-900 active:bg-red-500" label="Absenden" />        
+        <UButton type="reset" class="bg-gray-500 hover:bg-gray-700 active:bg-gray-500" :label="$t('Eingaben löschen')" />
+        <UButton type="submit" class="bg-red-500 hover:bg-red-900 active:bg-red-500" :label="$t('Absenden')" />        
       </div>
     </form>
   </div>
