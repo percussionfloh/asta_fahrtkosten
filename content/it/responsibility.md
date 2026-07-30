@@ -1,0 +1,2 @@
+Il contributo per le spese di viaggio sostenute a fini di studio, finanziato dal bilancio dell’AStA dell’Università di Musica di Friburgo, è un programma che può essere mantenuto solo se tutte le parti coinvolte lo gestiscono in modo onesto e responsabile.
+Qualora dovesse emergere un uso improprio di tale programma, l’AStA potrà revocarlo.

@@ -46,11 +46,7 @@ const { data: wie } = await useDoc('wie')
     </div>
 
   <UDropdownMenu :items="items">
-    <UButton
-      icon="i-lucide-languages"
-      variant="ghost"
-      color="neutral"
-    />
+    <UButton icon="i-lucide-languages" variant="ghost" color="neutral"/>
   </UDropdownMenu>
   </div>
 
