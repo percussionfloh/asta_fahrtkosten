@@ -4,7 +4,6 @@ Was wird bezuschusst?: Was wird bezuschusst?
 Höhe des Zuschusses: Höhe des Zuschusses
 Wie funktioniert die Antragsstellung?: Wie funktioniert die Antragsstellung?
 Antrag herunterladen (pdf): Antrag herunterladen (pdf)
-Beim Senden ist ein Fehler aufgetreten.: Beim Senden ist ein Fehler aufgetreten.
 Antrag erfolgreich gesendet!: Antrag erfolgreich gesendet!
 Vorname: Vorname
 Nachname: Nachname
@@ -14,3 +13,7 @@ Teilnahmebestätigung: Teilnahmebestätigung
 weitere Infos für den AStA: weitere Infos für den AStA
 Eingaben löschen: Eingaben löschen
 Absenden: Absenden
+Antrag wird gesendet: Sending Application...
+Beim Senden der E-Mail ist ein Fehler aufgetreten.: An error occurred while sending the email.
+Bitte bestätige zuerst das CAPTCHA.: Bitte bestätige zuerst das CAPTCHA.
+Beim Senden ist ein Fehler aufgetreten.: Beim Senden ist ein Fehler aufgetreten.

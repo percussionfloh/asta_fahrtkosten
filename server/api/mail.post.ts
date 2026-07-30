@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   if (!form) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Keine Formulardaten empfangen.'
+      statusMessage: 'An error occurred.'
     })
   }
 
@@ -15,10 +15,27 @@ export default defineEventHandler(async (event) => {
   config.turnstileSecret
 
   const firstName =
-  form.find(field => field.name === 'firstName')?.data.toString().trim() ?? ''
+    form.find(field => field.name === 'firstName')?.data.toString().trim() ?? ''
 
   const lastName =
-  form.find(field => field.name === 'lastName')?.data.toString().trim() ?? ''
+    form.find(field => field.name === 'lastName')?.data.toString().trim() ?? ''
+
+  if (!firstName || !lastName) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'An error occurred.'
+    })
+  }
+  const antrag = form.find(field => field.name === 'antrag' && field.filename)
+  const rechnung = form.find(field => field.name === 'rechnung' && field.filename)
+  const bestaetigung = form.find(field => field.name === 'bestaetigung' && field.filename)
+
+  if (!antrag || !rechnung || !bestaetigung) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'An error occurred.'
+    })
+  }
 
   const kommentar =
     form.find(field => field.name === 'kommentar')?.data.toString() ?? ''

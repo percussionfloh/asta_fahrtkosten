@@ -55,7 +55,7 @@ const submitForm = async () => {
       document.querySelector('input[name="cf-turnstile-response"]')?.value || ''
 
     if (!token) {
-      serverMessage.value = 'Bitte bestätige zuerst das CAPTCHA.'
+      serverMessage.value = t('Bitte bestätige zuerst das CAPTCHA.')
       isSubmitting.value = false
       return
     }
@@ -74,7 +74,7 @@ const submitForm = async () => {
     console.error(error)
 
     wasSent.value = false
-    serverMessage.value = 'Beim Senden ist ein Fehler aufgetreten.'
+    serverMessage.value = t('Beim Senden ist ein Fehler aufgetreten.')
   } finally {
     isSubmitting.value = false
   }
@@ -101,7 +101,7 @@ const resetForm = () => {
   <div>
     <div v-if="wasSent">
       <h3 class="text-2xl p-8 font-bold mb-4 text-red-600">
-        Antrag erfolgreich gesendet!
+        {{ $t('Antrag erfolgreich gesendet!') }}
       </h3>
       <p class="mb-6">
         {{ serverMessage }}
@@ -117,14 +117,17 @@ const resetForm = () => {
 
         <div class="w-full">
           <UFileUpload v-model="antrag" :dropzone="true" :label="$t('ausgefüllter Antrag')" class="w-full"/>
+            <p v-if="antrag" class="mt-2 text-sm text-gray-500">📄 {{ antrag.name }}</p>
         </div>
 
         <div class="w-full">
           <UFileUpload v-model="rechnung" :dropzone="true" :label="$t('ausgefüllte Rechnung')" class="w-full"/>
+          <p v-if="rechnung" class="mt-2 text-sm text-gray-500">📄 {{ rechnung.name }}</p>
         </div>
 
         <div class="w-full">
           <UFileUpload v-model="bestaetigung" :dropzone="true" :label="$t('Teilnahmebestätigung')" class="w-full"/>
+          <p v-if="bestaetigung" class="mt-2 text-sm text-gray-500">📄 {{ bestaetigung.name }}</p>
         </div>
 
         <div class="w-full">
