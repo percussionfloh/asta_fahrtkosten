@@ -28,6 +28,8 @@ export default defineNuxtConfig({
   },
 
   i18n: {
+    defaultLocale: 'de',
+    langDir: 'locales/',
     locales: [
       {
         code: 'de',
@@ -38,7 +40,6 @@ export default defineNuxtConfig({
         file: 'en.yaml'
       }
     ],
-    defaultLocale: 'de',
-    langDir: 'locales/'
+    detectBrowserLanguage: false
   }
 })

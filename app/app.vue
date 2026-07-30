@@ -1,22 +1,25 @@
-<script setup lang="ts">
+<script setup>
 import logo from '~/assets/logo.png'
 
 const { locale, locales, setLocale } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
-const { t } = useI18n();
 
 useHead({
   title: 'Fahrtkostenzuschuss AStA HfM Freiburg',
-    link: [
+  link: [
     {
       rel: 'icon',
-      type: '../assets/logo_small_lila.png',
       href: logo
     }
   ]
 })
 
-function useDoc(name: string) {
+const items = computed(() =>
+  locales.value.map(l => ({
+    label: l.code.toUpperCase(),
+    onSelect: () => setLocale(l.code)
+  }))
+)
+function useDoc(name) {
   return useAsyncData(
     name,
     () =>
@@ -42,9 +45,13 @@ const { data: wie } = await useDoc('wie')
       <img src="/assets/logo_mh.png" class="max-h-15 md:max-h-25" alt="Logo HfM Freiburg">
     </div>
 
-    <UDropdownMenu :items="locales.map(l => ({label: l.code.toUpperCase(),to: switchLocalePath(l.code)}))">
-    <UButton icon="i-lucide-languages" variant="ghost" color="neutral"/>
-    </UDropdownMenu>
+  <UDropdownMenu :items="items">
+    <UButton
+      icon="i-lucide-languages"
+      variant="ghost"
+      color="neutral"
+    />
+  </UDropdownMenu>
   </div>
 
 
