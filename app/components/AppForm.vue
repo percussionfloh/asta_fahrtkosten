@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+const { t } = useI18n()
 
 useHead({
   script: [
@@ -14,8 +15,9 @@ useHead({
 const config = useRuntimeConfig()
 
 const antrag = ref(null)
-const rechnung = ref(null)
-const bestaetigung = ref(null)
+const rechnung = ref([])
+const bestaetigung = ref([])
+
 const kommentar = ref('')
 const firstName = ref('')
 const lastName = ref('')
@@ -30,19 +32,19 @@ const submitForm = async () => {
   isSubmitting.value = true
   serverMessage.value = ''
 
-  try {
+  try {    
     const formData = new FormData()
 
     if (antrag.value) {
       formData.append('antrag', antrag.value)
     }
 
-    if (rechnung.value) {
-      formData.append('rechnung', rechnung.value)
+    for (const file of rechnung.value) {
+      formData.append('rechnung', file)
     }
 
-    if (bestaetigung.value) {
-      formData.append('bestaetigung', bestaetigung.value)
+    for (const file of bestaetigung.value) {
+      formData.append('bestaetigung', file)
     }
 
     formData.append('kommentar', kommentar.value)
@@ -82,8 +84,8 @@ const submitForm = async () => {
 
 const resetForm = () => {
   antrag.value = null
-  rechnung.value = null
-  bestaetigung.value = null
+  rechnung.value = []
+  bestaetigung.value = []
   kommentar.value = ''
   firstName.value = ''
   lastName.value = ''
@@ -104,7 +106,7 @@ const resetForm = () => {
         {{ $t('Antrag erfolgreich gesendet!') }}
       </h3>
       <p class="mb-6">
-        {{ serverMessage }}
+        {{ statusMessage }}
       </p>
     </div>
 
@@ -117,39 +119,38 @@ const resetForm = () => {
 
         <div class="w-full">
           <UFileUpload v-model="antrag" :dropzone="true" :label="$t('ausgefüllter Antrag')" class="w-full"/>
-            <p v-if="antrag" class="mt-2 text-sm text-gray-500">📄 {{ antrag.name }}</p>
+          <p v-if="antrag" class="mt-2 text-sm text-gray-500">📄 {{ antrag.name }}</p>
         </div>
 
         <div class="w-full">
-          <UFileUpload v-model="rechnung" :dropzone="true" :label="$t('ausgefüllte Rechnung')" class="w-full"/>
-          <p v-if="rechnung" class="mt-2 text-sm text-gray-500">📄 {{ rechnung.name }}</p>
+          <UFileUpload v-model="rechnung" multiple :dropzone="true" :label="$t('ausgefüllte Rechnung(en)')" class="w-full"/>
+          <div
+            v-if="rechnung.length"
+            class="mt-2 space-y-1 text-sm text-gray-500">
+            <p v-for="file in rechnung" :key="`${file.name}-${file.size}`">📄 {{ file.name }}</p>
+          </div>
         </div>
 
         <div class="w-full">
-          <UFileUpload v-model="bestaetigung" :dropzone="true" :label="$t('Teilnahmebestätigung')" class="w-full"/>
-          <p v-if="bestaetigung" class="mt-2 text-sm text-gray-500">📄 {{ bestaetigung.name }}</p>
+          <UFileUpload v-model="bestaetigung" multiple :dropzone="true" :label="$t('Teilnahmebestätigung(en)')" class="w-full"/>
+
+          <div v-if="bestaetigung.length" class="mt-2 space-y-1 text-sm text-gray-500">
+            <p v-for="file in bestaetigung" :key="`${file.name}-${file.size}`">📄 {{ file.name }}</p>
+          </div>
         </div>
 
         <div class="w-full">
           <UTextarea v-model="kommentar" :rows="9" class="w-full" :placeholder="$t('weitere Infos für den AStA')"/>
         </div>
-
-        <div
-          class="cf-turnstile"
-          :data-sitekey="config.public.turnstileSiteKey">
-        </div>
+        <div class="cf-turnstile" :data-sitekey="config.public.turnstileSiteKey"/>
 
         <div class="md:col-span-5 flex md:flex-row justify-center gap-4 mt-4">
           <UButton type="reset" class="bg-gray-500 hover:bg-gray-700 active:bg-gray-500" :label="$t('Eingaben löschen')" @click="resetForm"/>
-
-          <UButton type="submit" class="bg-red-500 hover:bg-red-900 active:bg-red-500" :label="$t('Absenden')"/>
+          <UButton type="submit"class="bg-red-500 hover:bg-red-900 active:bg-red-500" :label="$t('Absenden')"/>
         </div>
       </div>
 
-
-      <div v-if="serverMessage && !wasSent" class="p-4 mb-8 text-center bg-red-900 text-red-300">
-        {{ serverMessage }}
-      </div>
+      <div v-if="serverMessage && !wasSent" class="p-4 mb-8 text-center bg-red-900 text-red-300">{{ serverMessage }}</div>
 
       <div v-if="isSubmitting" class="text-center mb-10">
         <Icon name="svg-spinners:3-dots-scale" size="48" />
