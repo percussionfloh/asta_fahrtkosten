@@ -62,7 +62,7 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
+  const MAX_SIZE = 100 * 1024 * 1024 // 10 MB
 
   for (const file of [antrag, rechnung, bestaetigung]) {
     if (file.data.length > MAX_SIZE) {
