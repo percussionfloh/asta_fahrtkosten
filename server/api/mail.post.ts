@@ -10,6 +10,8 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  
+
   const config = useRuntimeConfig()
 
   config.turnstileSecret
@@ -59,6 +61,17 @@ export default defineEventHandler(async (event) => {
       contentType: file.type
     }
   })
+
+  const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
+
+  for (const file of [antrag, rechnung, bestaetigung]) {
+    if (file.data.length > MAX_SIZE) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'File too large.'
+      })
+    }
+  }
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
