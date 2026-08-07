@@ -6,11 +6,10 @@ export default defineEventHandler(async (event) => {
   if (!form) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'An error occurred.'
+      statusMessage: 'Form incomplete.'
     })
   }
 
-  
 
   const config = useRuntimeConfig()
 
@@ -25,34 +24,59 @@ export default defineEventHandler(async (event) => {
   if (!firstName || !lastName) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'An error occurred.'
+      statusMessage: 'Name First and Last are required.'
     })
   }
-  const antrag = form.find(field => field.name === 'antrag' && field.filename)
-  const rechnung = form.find(field => field.name === 'rechnung' && field.filename)
-  const bestaetigung = form.find(field => field.name === 'bestaetigung' && field.filename)
+  
+    const antrag = form.find(
+    field => field.name === 'antrag' && field.filename
+  )
 
-  if (!antrag || !rechnung || !bestaetigung) {
+  const rechnungen = form.filter(
+    field => field.name === 'rechnung' && field.filename
+  )
+
+  const bestaetigungen = form.filter(
+    field => field.name === 'bestaetigung' && field.filename
+  )
+
+  if (!antrag || rechnungen.length === 0 || bestaetigungen.length === 0) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'An error occurred.'
+      statusMessage: 'All documents are required.'
     })
   }
 
+
+ 
   const kommentar =
     form.find(field => field.name === 'kommentar')?.data.toString() ?? ''
+
+  const totalRechnungen = rechnungen.length
+  const totalBestaetigungen = bestaetigungen.length
+
+  let rechnungIndex = 0
+  let bestaetigungIndex = 0
 
   const attachments = form
   .filter(field => field.filename)
   .map(file => {
-    let typ = file.name
+    let typ
 
     if (file.name === 'antrag') {
       typ = 'Antrag'
     } else if (file.name === 'rechnung') {
-      typ = 'Rechnung'
+      rechnungIndex++
+      typ = totalRechnungen > 1
+        ? `Rechnung (${rechnungIndex}/${totalRechnungen})`
+        : 'Rechnung'
     } else if (file.name === 'bestaetigung') {
-      typ = 'Teilnahmebestaetigung'
+      bestaetigungIndex++
+      typ = totalBestaetigungen > 1
+        ? `Teilnahmebestaetigung (${bestaetigungIndex}/${totalBestaetigungen})`
+        : 'Teilnahmebestaetigung'
+    } else {
+      typ = file.name
     }
 
     return {
@@ -64,7 +88,7 @@ export default defineEventHandler(async (event) => {
 
   const MAX_SIZE = 100 * 1024 * 1024 // 10 MB
 
-  for (const file of [antrag, rechnung, bestaetigung]) {
+  for (const file of [antrag, ...rechnungen, ...bestaetigungen]) {
     if (file.data.length > MAX_SIZE) {
       throw createError({
         statusCode: 400,
