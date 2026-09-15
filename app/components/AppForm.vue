@@ -19,6 +19,7 @@ const rechnung = ref([])
 const bestaetigung = ref([])
 
 const kommentar = ref('')
+const MHmail = ref('')
 const firstName = ref('')
 const lastName = ref('')
 
@@ -48,6 +49,8 @@ const submitForm = async () => {
     }
 
     formData.append('kommentar', kommentar.value)
+
+    formData.append('MHmail', MHmail.value)
 
     formData.append('firstName', firstName.value)
 
@@ -87,6 +90,7 @@ const resetForm = () => {
   rechnung.value = []
   bestaetigung.value = []
   kommentar.value = ''
+  MHmail.value =''
   firstName.value = ''
   lastName.value = ''
 
@@ -115,6 +119,7 @@ const resetForm = () => {
         <div class="flex flex-col gap-3 w-full">
           <UInput v-model="firstName" class="w-full" :placeholder="$t('Vorname')"/>
           <UInput v-model="lastName" class="w-full" :placeholder="$t('Nachname')"/>
+          <UInput v-model="MHmail" class="w-full" :placeholder="$t('MH-Mail-Adresse')"/>
         </div>
 
         <div class="w-full">
