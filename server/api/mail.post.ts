@@ -47,7 +47,8 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-
+  const MHmail = 
+    form.find(field => field.name === 'MHmail')?.data.toString() ?? ''
  
   const kommentar =
     form.find(field => field.name === 'kommentar')?.data.toString() ?? ''
@@ -113,8 +114,9 @@ export default defineEventHandler(async (event) => {
 
       text: `Ein neuer Antrag auf Fahrtkostenzuschuss wurde eingereicht. 
       
-      Kommentar: ${kommentar}`,
+      Kommentar: ${kommentar}
 
+      MH-Mail: ${MHmail}`,
       attachments
     })
 
