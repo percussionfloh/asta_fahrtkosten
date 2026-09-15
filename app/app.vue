@@ -5,6 +5,11 @@ const currentYear = new Date().getFullYear()
 
 const { locale, locales, setLocale } = useI18n()
 
+const colorMode = useColorMode()
+
+colorMode.preference = 'light'
+colorMode.value = 'light'
+
 useHead({
   title: 'Fahrtkostenzuschuss AStA HfM Freiburg',
   link: [
