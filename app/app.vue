@@ -1,6 +1,8 @@
 <script setup>
 import logo from '~/assets/logo.png'
 
+const currentYear = new Date().getFullYear()
+
 const { locale, locales, setLocale } = useI18n()
 
 useHead({
@@ -101,4 +103,7 @@ const { data: wie } = await useDoc('wie')
       </div>
     </div>
   </UContainer>
+  <footer class="border-t border-gray-200 py-6">
+    <p class="text-center text-sm text-gray-500">© {{ currentYear }}, Florian Moldaschl. Alle Rechte vorbehalten.</p>
+  </footer>
 </template>
