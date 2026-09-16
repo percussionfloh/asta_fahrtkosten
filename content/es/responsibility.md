@@ -1,2 +1,2 @@
-La ayuda para gastos de desplazamiento con fines académicos, financiada con cargo al presupuesto de la AStA de la Universidad de Música de Friburgo, es un programa que solo puede mantenerse si todas las personas implicadas lo gestionan con honestidad y responsabilidad.
+La subvención para gastos de desplazamiento con fines académicos, financiada con cargo a los Fondos de Garantía de Calidad de la Universidad de Música de Friburgo, es un programa que solo puede mantenerse si todas las partes implicadas lo gestionan con honestidad y responsabilidad.
 En caso de que se detectara un uso indebido de este programa, la AStA podría suspenderlo.

@@ -1,2 +1,2 @@
-La subvention destinée à couvrir les frais de déplacement engagés à des fins d'études, financée par le budget de l'AStA de l'Université de musique de Fribourg, est un dispositif qui ne peut être maintenu que si toutes les personnes concernées s'en servent de manière honnête et responsable.
-S'il s'avérait que ce dispositif fasse l'objet d'abus, l'AStA se réserve le droit de le supprimer.
+La prise en charge des frais de déplacement engagés à des fins d'études, financée par les fonds d'assurance qualité de l'Université de musique de Fribourg, est un dispositif qui ne peut être maintenu que si toutes les personnes concernées s'en servent de manière honnête et responsable.
+S'il s'avérait que ce dispositif fasse l'objet d'abus, l'AStA pourrait y mettre fin.
