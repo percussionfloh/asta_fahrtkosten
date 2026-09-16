@@ -8,8 +8,8 @@ Antrag erfolgreich gesendet!: Application submitted successfully!
 Vorname: First Name
 Nachname: Last Name
 ausgefüllter Antrag: Completed Application
-ausgefüllte Rechnung: Completed Invoice
-Teilnahmebestätigung: Participation Confirmation
+ausgefüllte Rechnung(en): Completed Invoice(s)
+Teilnahmebestätigung(en): Participation Confirmation(s)
 weitere Infos für den AStA: Additional Information for the Student Council
 Eingaben löschen: Clear Inputs
 Absenden: Submit
@@ -17,3 +17,4 @@ Antrag wird gesendet: Sending Application...
 Beim Senden der E-Mail ist ein Fehler aufgetreten.: An error occurred while sending the email.
 Bitte bestätige zuerst das CAPTCHA.: Please confirm the CAPTCHA first.
 Beim Senden ist ein Fehler aufgetreten.: An error occurred while sending.
+MH-Mail-Adresse: email address of the MH Freiburg

@@ -8,8 +8,8 @@ Antrag erfolgreich gesendet!: Demande envoyée avec succès !
 Vorname: Prénom
 Nachname: Nom
 ausgefüllter Antrag: Formulaire de demande rempli
-ausgefüllte Rechnung: Facture remplie
-Teilnahmebestätigung: Confirmation de participation
+ausgefüllte Rechnung(en): Facture(s) remplie(s)
+Teilnahmebestätigung(en): Confirmation(s) de participation
 weitere Infos für den AStA: Informations supplémentaires pour le Conseil des étudiants
 Eingaben löschen: Effacer les champs
 Absenden: Envoyer
@@ -17,3 +17,4 @@ Antrag wird gesendet: Envoi de la demande...
 Beim Senden der E-Mail ist ein Fehler aufgetreten.: Une erreur s'est produite lors de l'envoi de l'e-mail.
 Bitte bestätige zuerst das CAPTCHA.: Veuillez d'abord confirmer le CAPTCHA.
 Beim Senden ist ein Fehler aufgetreten.: Une erreur s'est produite lors de l'envoi.
+MH-Mail-Adresse: Adresse e-mail de la MH Freiburg

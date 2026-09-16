@@ -8,8 +8,8 @@ Antrag erfolgreich gesendet!: Antrag erfolgreich gesendet!
 Vorname: Vorname
 Nachname: Nachname
 ausgefüllter Antrag: ausgefüllter Antrag
-ausgefüllte Rechnung: ausgefüllte Rechnung
-Teilnahmebestätigung: Teilnahmebestätigung
+ausgefüllte Rechnung(en): ausgefüllte Rechnung(en)
+Teilnahmebestätigung(en): Teilnahmebestätigung(en)
 weitere Infos für den AStA: weitere Infos für den AStA
 Eingaben löschen: Eingaben löschen
 Absenden: Absenden
@@ -17,3 +17,4 @@ Antrag wird gesendet: Sending Application...
 Beim Senden der E-Mail ist ein Fehler aufgetreten.: An error occurred while sending the email.
 Bitte bestätige zuerst das CAPTCHA.: Bitte bestätige zuerst das CAPTCHA.
 Beim Senden ist ein Fehler aufgetreten.: Beim Senden ist ein Fehler aufgetreten.
+MH-Mail-Adresse: MH-Mail-Adresse

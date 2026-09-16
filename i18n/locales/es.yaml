@@ -8,8 +8,8 @@ Antrag erfolgreich gesendet!: ¡Solicitud enviada con éxito!
 Vorname: Nombre
 Nachname: Apellidos
 ausgefüllter Antrag: Solicitud cumplimentada
-ausgefüllte Rechnung: Factura cumplimentada
-Teilnahmebestätigung: Certificado de asistencia
+ausgefüllte Rechnung: Factura(s) cumplimentada(s)
+Teilnahmebestätigung(en): Certificado(s) de asistencia
 weitere Infos für den AStA: Más información para el AStA
 Eingaben löschen: Borrar datos
 Absenden: Enviar
@@ -17,3 +17,4 @@ Antrag wird gesendet: Se está enviando la solicitud
 Beim Senden der E-Mail ist ein Fehler aufgetreten.: Se ha producido un error al enviar el correo electrónico.
 Bitte bestätige zuerst das CAPTCHA.: Por favor, confirma primero el CAPTCHA.
 Beim Senden ist ein Fehler aufgetreten.: Se ha producido un error al enviar el formulario.
+MH-Mail-Adresse: Dirección de correo electrónico de MH Freiburg
